@@ -21,7 +21,7 @@ bam fastq glf vcf: general
 RELEASE_FILE?=libStatGen.$(VERSION).tgz
 
 # Package the library.
-package : 
+package :
 # the touch gets rid of a tar warning
 	touch $(RELEASE_FILE)
-	tar chvz --exclude="*~" --exclude=$(RELEASE_FILE) --exclude='obj/*' --exclude='*.a'  --exclude='include/*' --exclude='bin/*' --exclude='test/results/*' --exclude-vcs -f $(RELEASE_FILE) --transform 's,^,libStatGen_$(VERSION)/,' * --show-transformed-names 
+	tar chvz --exclude="*~" --exclude=$(RELEASE_FILE) --exclude='obj/*' --exclude='*.a'  --exclude='include/*' --exclude='bin/*' --exclude='test/results/*' --exclude-vcs -f $(RELEASE_FILE) --transform 's,^,libStatGen_$(VERSION)/,' * --show-transformed-names

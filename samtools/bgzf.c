@@ -34,13 +34,13 @@
 #ifdef _USE_KNETFILE
 #include "knetfile.h"
 typedef knetFile *_bgzf_file_t;
-#define _bgzf_open(fn, mode) knet_open(fn, mode)
-#define _bgzf_dopen(fp, mode) knet_dopen(fp, mode)
-#define _bgzf_close(fp) knet_close(fp)
+#define _bgzf_open(fn, mode) knet_open2(fn, mode)
+#define _bgzf_dopen(fp, mode) knet_dopen2(fp, mode)
+#define _bgzf_close(fp) knet_close2(fp)
 #define _bgzf_fileno(fp) ((fp)->fd)
 #define _bgzf_tell(fp) knet_tell(fp)
-#define _bgzf_seek(fp, offset, whence) knet_seek(fp, offset, whence)
-#define _bgzf_read(fp, buf, len) knet_read(fp, buf, len)
+#define _bgzf_seek(fp, offset, whence) knet_seek2(fp, offset, whence)
+#define _bgzf_read(fp, buf, len) knet_read2(fp, buf, len)
 #define _bgzf_write(fp, buf, len) knet_write(fp, buf, len)
 #else // ~defined(_USE_KNETFILE)
 #if defined(_WIN32) || defined(_MSC_VER)

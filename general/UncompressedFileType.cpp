@@ -20,46 +20,44 @@
 
 UncompressedFileType::UncompressedFileType(const char * filename,
                                            const char * mode)
-    : filePtr(NULL),
-      kfilePtr(NULL),
-      keof(false)
+  : filePtr(NULL),
+  kfilePtr(NULL),
+  keof(false)
 {
-    // Check if opening for read.
-    if((mode[0] == 'r') || (mode[0] == 'R'))
+  // Check if opening for read.
+  if ((mode[0] == 'r') || (mode[0] == 'R'))
+  {
+    if (strcmp(filename, "-") == 0)
     {
-        if(strcmp(filename, "-") == 0)
-        {
-            // read from stdin
-            filePtr = stdin;
-        }
-        else if((strstr(filename, "ftp://") == filename) ||
-                (strstr(filename, "http://") == filename))
-        {
-            // Reading http/ftp, so open the file using knetfile.
-            kfilePtr = knet_open(filename, mode);
-        }
-        else
-        {
-            // Open the file.
-            filePtr = fopen(filename, mode);
-        }
+      // read from stdin
+      filePtr = stdin;
+    }
+    else if ((strstr(filename, "ftp://") == filename) ||
+             (strstr(filename, "http://") == filename))
+    {
+      // Reading http/ftp, so open the file using knetfile.
+      kfilePtr = knet_open2(filename, mode);
     }
     else
     {
-        // Not for read.
-        // If the file is for write and is '-', then write to stdout.
-        if(((mode[0] == 'w') || (mode[0] == 'W')) && 
-           (strcmp(filename, "-") == 0))
-        {
-            // Write to stdout.
-            filePtr = stdout;
-        }
-        else
-        {
-            // Open the file.
-            filePtr = fopen(filename, mode);
-        }
+      // Open the file.
+      filePtr = fopen(filename, mode);
     }
-};
-
-
+  }
+  else
+  {
+    // Not for read.
+    // If the file is for write and is '-', then write to stdout.
+    if (((mode[0] == 'w') || (mode[0] == 'W')) &&
+        (strcmp(filename, "-") == 0))
+    {
+      // Write to stdout.
+      filePtr = stdout;
+    }
+    else
+    {
+      // Open the file.
+      filePtr = fopen(filename, mode);
+    }
+  }
+}

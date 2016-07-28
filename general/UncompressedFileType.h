@@ -79,7 +79,7 @@ public:
         }
         else if(kfilePtr != NULL)
         {
-            int result = knet_close(kfilePtr);
+            int result = knet_close2(kfilePtr);
             kfilePtr = NULL;
             return result;
         }
@@ -97,7 +97,7 @@ public:
         }
         else if (kfilePtr != NULL)
         {
-            knet_seek(kfilePtr, 0, SEEK_SET);
+            knet_seek2(kfilePtr, 0, SEEK_SET);
         }
     }
 
@@ -140,7 +140,7 @@ public:
     {
         if(kfilePtr != NULL)
         {
-            int bytesRead = knet_read(kfilePtr, buffer, size);
+            int bytesRead = knet_read2(kfilePtr, buffer, size);
             if((bytesRead == 0) && (size != 0))
             {
                 keof = true;
@@ -185,7 +185,7 @@ public:
         int returnVal = 0;
         if(kfilePtr != NULL)
         {
-            returnVal = knet_seek(kfilePtr, offset, origin);
+            returnVal = knet_seek2(kfilePtr, offset, origin);
             keof = false;
         }
         else
@@ -210,5 +210,3 @@ protected:
 };
 
 #endif
-
-
